@@ -1,3 +1,18 @@
+import random
+
+
+def GenList(N):
+    newlist = []
+
+    for i in range(N):
+        r = random.randint(0, 10)
+        newlist.append(r)
+
+    
+    return newlist
+
+
+
 def BubbleSort(A):
     
     for i in range(len(A)):
@@ -37,20 +52,23 @@ def ShakerSort(A):
         if swapt == False:
             break
 
-    return A 
+    return A
 
 
 
+def CountingSort(A):
 
+    m = max(A)
 
-        
+    list1 = []
 
+    for i in range(m + 1):
+        for j in range(len(A)):
+            if i == A[j]:
+                list1.append(i)
+                
 
-
-
-
-
-
+    return list1
 
 
 
@@ -58,8 +76,35 @@ def ShakerSort(A):
 
 
 def main():
-    list1 = [5,4,2,7,1,2,0,9]
-    print(ShakerSort(list1))
+    list1 = GenList(20)
+    A = list1
+    list1 = BubbleSort(list1)
+    print(list1)
+    A.sort()
+    print(A)
+
+    print()
+
+
+    list2 = GenList(20)
+    B = list2
+    list2 = ShakerSort(list2)
+    print(list2)
+    B.sort()
+    print(B)
+
+    print()
+
+
+    list3 = GenList(20)
+    C = list3
+    list3 = CountingSort(list3)
+    print(list3)
+    C.sort()
+    print(C)
+
+
+
 
 
 
