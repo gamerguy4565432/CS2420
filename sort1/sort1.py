@@ -5,7 +5,7 @@ def GenList(N):
     newlist = []
 
     for i in range(N):
-        r = random.randint(0, 10)
+        r = random.randint(1, N)
         newlist.append(r)
 
     
@@ -15,60 +15,61 @@ def GenList(N):
 
 def BubbleSort(A):
     
-    for i in range(len(A)):
-        for j in range(len(A)):
-            if A[i] < A[j]:
-                A[i], A[j] = A[j], A[i]
+    changes = True
+
+    while changes:
+        changes = False
 
 
-    return A
+        for i in range(0, len(A) - 1):
+            if A[i] > A[i + 1]:
+                A[i], A[i + 1] = A[i + 1], A[i]
+                changes = True
 
+
+# o(n^2)
 
 
 def ShakerSort(A):
 
-    swapt = True
-    start = 0
-    stop = len(A) - 1
+    changes = True
+    
+    while changes:
+        changes = False
 
-    while swapt:
-        swapt = False
-        for i in range(start, stop):
+        for i in range(0, len(A) - 1):
             if A[i] > A[i + 1]:
-                A[i], A[i + 1] = A[i + 1], A[i]
-                swapt = True
-
-
-        if swapt == False:
-            break
-
-
-        for i in range(start, stop):
-            if A[i] > A[i + 1]:
-                A[i], A[i + 1] = A[i + 1], A[i]
-                swapt = True
+                A[i], A[i+1] = A[i+1], A[i]
+                changes = True
 
         
-        if swapt == False:
-            break
+        for j in range(len(A) - 2, -1, -1):
+            if A[j] > A[j + 1]:
+                A[j], A[j + 1] = A[j + 1], A[j]
+                changes = True
 
-    return A
 
 
 
 def CountingSort(A):
 
-    m = max(A)
+    F = [0] * (len(A) + 1)
 
-    list1 = []
+    for v in A:
+        F[v] += 1
 
-    for i in range(m + 1):
-        for j in range(len(A)):
-            if i == A[j]:
-                list1.append(i)
-                
+    
 
-    return list1
+    k = 0
+
+    for i in range(len(F)):
+        v = i
+        count = F[i]
+
+    
+        for j in range(count):
+            A[k] = v
+            k += 1
 
 
 
@@ -77,8 +78,9 @@ def CountingSort(A):
 
 def main():
     list1 = GenList(20)
+    print(list1)
     A = list1
-    list1 = BubbleSort(list1)
+    BubbleSort(list1)
     print(list1)
     A.sort()
     print(A)
@@ -88,7 +90,7 @@ def main():
 
     list2 = GenList(20)
     B = list2
-    list2 = ShakerSort(list2)
+    ShakerSort(list2)
     print(list2)
     B.sort()
     print(B)
@@ -98,7 +100,7 @@ def main():
 
     list3 = GenList(20)
     C = list3
-    list3 = CountingSort(list3)
+    CountingSort(list3)
     print(list3)
     C.sort()
     print(C)
@@ -110,5 +112,5 @@ def main():
 
 
 
-
-main()
+if __name__ == '__main__':
+    main()
